@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dependent Dropdown</title>
+</head>
+
+<body>
+    <label for="division">Division:</label>
+    <select id="division" onchange="updateDistricts()">
+        <option value="">Select Division</option>
+    </select>
+
+    <label for="district">District:</label>
+    <select id="district" onchange="updateUpozilas()">
+        <option value="">Select District</option>
+    </select>
+
+    <label for="upozila">Upozila:</label>
+    <select id="upozila">
+        <option value="">Select Upozila</option>
+    </select>
+
+    <!-- <script src="script.js"></script> -->
+    <script>
+        const data = {
+            "divisions": [
+                {
+                    "id": "1",
+                    "name": "Barishal",
+                    "bn_name": "বরিশাল",
+                    "lat": "22.701002",
+                    "long": "90.353451",
+                    "districts": [
+                        {
+                            "id": "34",
+                            "division_id": "1",
+                            "name": "Barguna",
+                            "bn_name": "বরগুনা",
+                            "lat": "22.0953",
+                            "long": "90.1121",
+                            "upozila": [
+                                {
+                                    "id": "1",
+                                    "district_id": "34",
+                                    "name": "Amtali",
+                                    "bn_name": "আমতলী"
+                                },
+                                {
+                                    "id": "2",
+                                    "district_id": "34",
+                                    "name": "Bamna",
+                                    "bn_name": "বামনা"
+                                },
+                                {
+                                    "id": "3",
+                                    "district_id": "34",
+                                    "name": "Barguna Sadar",
+                                    "bn_name": "বরগুনা সদর"
+                                },
+                                {
+                                    "id": "4",
+                                    "district_id": "34",
+                                    "name": "Betagi",
+                                    "bn_name": "বেতাগি"
+                                },
+                                {
+                                    "id": "5",
+                                    "district_id": "34",
+                                    "name": "Patharghata",
+                                    "bn_name": "পাথরঘাটা"
+                                },
+                                {
+                                    "id": "6",
+                                    "district_id": "34",
+                                    "name": "Taltali",
+                                    "bn_name": "তালতলী"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "2",
+                    "name": "Chattogram",
+                    "bn_name": "চট্টগ্রাম",
+                    "lat": "22.356851",
+                    "long": "91.783182",
+                    "districts": [
+                        {
+                            "id": "40",
+                            "division_id": "2",
+                            "name": "Bandarban",
+                            "bn_name": "বান্দরবান",
+                            "lat": "22.1953275",
+                            "long": "92.2183773",
+                            "upozila": [
+                                {
+                                    "id": "43",
+                                    "district_id": "40",
+                                    "name": "Bandarban Sadar",
+                                    "bn_name": "বান্দরবন সদর"
+                                },
+                                {
+                                    "id": "44",
+                                    "district_id": "40",
+                                    "name": "Thanchi",
+                                    "bn_name": "থানচি"
+                                },
+                                {
+                                    "id": "45",
+                                    "district_id": "40",
+                                    "name": "Lama",
+                                    "bn_name": "লামা"
+                                },
+                                {
+                                    "id": "46",
+                                    "district_id": "40",
+                                    "name": "Naikhongchhari",
+                                    "bn_name": "নাইখংছড়ি "
+                                },
+                                {
+                                    "id": "47",
+                                    "district_id": "40",
+                                    "name": "Ali kadam",
+                                    "bn_name": "আলী কদম"
+                                },
+                                {
+                                    "id": "48",
+                                    "district_id": "40",
+                                    "name": "Rowangchhari",
+                                    "bn_name": "রউয়াংছড়ি "
+                                },
+                                {
+                                    "id": "49",
+                                    "district_id": "40",
+                                    "name": "Ruma",
+                                    "bn_name": "রুমা"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "41",
+                            "division_id": "2",
+                            "name": "Brahmanbaria",
+                            "bn_name": "ব্রাহ্মণবাড়িয়া",
+                            "lat": "23.9570904",
+                            "long": "91.1119286",
+                            "upozila": [
+                                {
+                                    "id": "50",
+                                    "district_id": "41",
+                                    "name": "Brahmanbaria Sadar",
+                                    "bn_name": "ব্রাহ্মণবাড়িয়া সদর"
+                                },
+                                {
+                                    "id": "51",
+                                    "district_id": "41",
+                                    "name": "Ashuganj",
+                                    "bn_name": "আশুগঞ্জ"
+                                },
+                                {
+                                    "id": "52",
+                                    "district_id": "41",
+                                    "name": "Nasirnagar",
+                                    "bn_name": "নাসির নগর"
+                                },
+                                {
+                                    "id": "53",
+                                    "district_id": "41",
+                                    "name": "Nabinagar",
+                                    "bn_name": "নবীনগর"
+                                },
+                                {
+                                    "id": "54",
+                                    "district_id": "41",
+                                    "name": "Sarail",
+                                    "bn_name": "সরাইল"
+                                },
+                                {
+                                    "id": "55",
+                                    "district_id": "41",
+                                    "name": "Shahbazpur Town",
+                                    "bn_name": "শাহবাজপুর টাউন"
+                                },
+                                {
+                                    "id": "56",
+                                    "district_id": "41",
+                                    "name": "Kasba",
+                                    "bn_name": "কসবা"
+                                },
+                                {
+                                    "id": "57",
+                                    "district_id": "41",
+                                    "name": "Akhaura",
+                                    "bn_name": "আখাউরা"
+                                },
+                                {
+                                    "id": "58",
+                                    "district_id": "41",
+                                    "name": "Bancharampur",
+                                    "bn_name": "বাঞ্ছারামপুর"
+                                },
+                                {
+                                    "id": "59",
+                                    "district_id": "41",
+                                    "name": "Bijoynagar",
+                                    "bn_name": "বিজয় নগর"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        window.onload = function () {
+            populateDivisions();
+        };
+
+        function populateDivisions() {
+            const divisionSelect = document.getElementById("division");
+            data.divisions.forEach(division => {
+                const option = document.createElement("option");
+                option.value = division.id;
+                option.textContent = division.name;
+                divisionSelect.appendChild(option);
+            });
+        }
+
+        function updateDistricts() {
+            const divisionSelect = document.getElementById("division");
+            const districtSelect = document.getElementById("district");
+            const upozilaSelect = document.getElementById("upozila");
+
+            districtSelect.innerHTML = '<option value="">Select District</option>';
+            upozilaSelect.innerHTML = '<option value="">Select Upozila</option>';
+
+            const selectedDivisionId = divisionSelect.value;
+            if (selectedDivisionId) {
+                const selectedDivision = data.divisions.find(division => division.id === selectedDivisionId);
+                selectedDivision.districts.forEach(district => {
+                    const option = document.createElement("option");
+                    option.value = district.id;
+                    option.textContent = district.name;
+                    districtSelect.appendChild(option);
+                });
+            }
+        }
+
+        function updateUpozilas() {
+            const districtSelect = document.getElementById("district");
+            const upozilaSelect = document.getElementById("upozila");
+
+            upozilaSelect.innerHTML = '<option value="">Select Upozila</option>';
+
+            const selectedDistrictId = districtSelect.value;
+            if (selectedDistrictId) {
+                const selectedDivisionId = document.getElementById("division").value;
+                const selectedDivision = data.divisions.find(division => division.id === selectedDivisionId);
+                const selectedDistrict = selectedDivision.districts.find(district => district.id === selectedDistrictId);
+                selectedDistrict.upozila.forEach(upozila => {
+                    const option = document.createElement("option");
+                    option.value = upozila.id;
+                    option.textContent = upozila.name;
+                    upozilaSelect.appendChild(option);
+                });
+            }
+        }
+
+    </script>
+</body>
+
+</html>
